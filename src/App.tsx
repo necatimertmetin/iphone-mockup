@@ -1,12 +1,13 @@
 import Notch from "/notch.svg";
 import Notchless from "/notchless.svg";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import wallpaper from "/wallpaper.png";
-import { Appbar } from "./components/Appbar";
-import { Slide } from "./components/slide/Slide";
+import { Box, Button, CssBaseline, Stack, ThemeProvider } from "@mui/material";
 import { darkTheme } from "./theme";
-import { Dock } from "./components/dock/Dock";
-import { FirstPage } from "./components/slide/slides/first-page/FirstPage";
+import { Homepage } from "./components/Homepage/Homepage";
+import customImage from "/apps/custom/custom.png";
+import { useState } from "react";
+import { CustomApp } from "./components/CustomApp/CustomApp";
+import { Appbar } from "./components/Appbar";
+
 function App() {
   //home dock icin soldan sagdan ve asagidan paddingler 12px
   //applar icin soldan sagdan padding 31px
@@ -17,7 +18,7 @@ function App() {
   //search genisligi 80px yuksekligi 32px
 
   const theme = darkTheme;
-
+  const [displayApp, setDisplayApp] = useState<boolean>(false);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -32,19 +33,6 @@ function App() {
         }}
       >
         <img
-          src={wallpaper}
-          className="logo react"
-          alt="React logo"
-          width={"392px"}
-          height={"824.46px"}
-          style={{
-            position: "absolute",
-            zIndex: -1,
-            paddingLeft: "4px",
-            borderRadius: "60px",
-          }}
-        />
-        <img
           src={Notch}
           className="logo react"
           alt="React logo"
@@ -52,15 +40,53 @@ function App() {
           height={"824.46px"}
           style={{ position: "absolute", zIndex: 5, pointerEvents: "none" }}
         />
-        <Box sx={{ paddingX: "12px" }}>
+        <Box
+          sx={{
+            width: "398px",
+            paddingLeft: "6px",
+            borderRadius: "60px",
+            overflow: "hidden",
+          }}
+        >
           <Appbar />
-          <Slide>
-            <FirstPage />
-            <div>Slide 2 İçeriği</div>
-            <div>Slide 3 İçeriği</div>
-            <div>Slide 4 İçeriği</div>
-          </Slide>
-          <Dock />
+
+          {displayApp ? (
+            <Stack
+              height={"815px"}
+              sx={{
+                background:
+                  " linear-gradient(180deg, rgba(53,56,62,1) 0%, rgba(24,26,28,1) 100%)",
+                borderRadius: "52px",
+                paddingTop: "64px",
+                paddingX: "12px",
+              }}
+            >
+              <CustomApp />
+              <Button
+                sx={{
+                  marginTop: "auto",
+                  marginX: "auto",
+                  padding: "5px",
+                  width: "25%",
+                  boxShadow: "none",
+                  borderBottom: `1px solid ${theme.palette.text.primary}`,
+                  borderRadius: 0,
+                  backgroundColor: "transparent",
+                }}
+                variant="contained"
+                onClick={() => setDisplayApp(false)}
+              />
+            </Stack>
+          ) : (
+            <Homepage
+              customApp={{
+                image: customImage,
+                title: "hey",
+                onClick: () => setDisplayApp(true),
+                enableBorder: true,
+              }}
+            />
+          )}
         </Box>
       </Box>
     </ThemeProvider>

@@ -51,27 +51,37 @@ export const Appbar = () => {
   useEffect(() => {
     // Battery API desteği kontrolü
     if (navigator.getBattery) {
-      navigator.getBattery().then((battery) => {
-        // Başlangıç bilgileri
-        setBatteryLevel(battery.level * 100);
-        setCharging(battery.charging);
+      navigator
+        .getBattery()
+        .then((battery) => {
+          if (battery) {
+            // Başlangıç bilgileri
+            setBatteryLevel(battery.level * 100);
+            setCharging(battery.charging);
 
-        // Event Listener ekleme
-        const updateBatteryInfo = () => setBatteryLevel(battery.level * 100);
-        const updateChargingInfo = () => setCharging(battery.charging);
+            // Event Listener ekleme
+            const updateBatteryInfo = () =>
+              setBatteryLevel(battery.level * 100);
+            const updateChargingInfo = () => setCharging(battery.charging);
 
-        battery.addEventListener("levelchange", updateBatteryInfo);
-        battery.addEventListener("chargingchange", updateChargingInfo);
+            battery.addEventListener("levelchange", updateBatteryInfo);
+            battery.addEventListener("chargingchange", updateChargingInfo);
 
-        return () => {
-          battery.removeEventListener("levelchange", updateBatteryInfo);
-          battery.removeEventListener("chargingchange", updateChargingInfo);
-        };
-      });
+            // Cleanup fonksiyonu
+            return () => {
+              battery.removeEventListener("levelchange", updateBatteryInfo);
+              battery.removeEventListener("chargingchange", updateChargingInfo);
+            };
+          }
+        })
+        .catch((error) => {
+          console.error("Battery API error: ", error);
+        });
+    } else {
+      console.warn("Battery API is not supported on this browser.");
     }
   }, []);
 
-  // Batarya durumuna göre ikon seçimi
   const getBatteryIcon = () => {
     if (charging) return <IoIosBatteryCharging fontSize="20px" />;
     if (batteryLevel !== null) {
@@ -87,7 +97,8 @@ export const Appbar = () => {
       alignItems={"center"}
       justifyContent={"space-between"}
       paddingY={"22px"}
-      paddingX={"26px"}
+      paddingX={"34px"}
+      sx={{ position: "absolute", width: "100%" }}
     >
       <Stack direction={"row"} alignItems={"center"} gap={"6px"}>
         <Typography variant="body2" sx={{ fontWeight: "600" }}>

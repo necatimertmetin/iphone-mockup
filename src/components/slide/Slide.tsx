@@ -5,7 +5,6 @@ import "/node_modules/swiper/modules/pagination.css";
 import { useState, useRef } from "react";
 import { Stack, Typography } from "@mui/material";
 import { IoIosSearch } from "react-icons/io";
-
 type SlideProps = {
   children: React.ReactNode[];
 };
@@ -66,7 +65,7 @@ export const Slide = ({ children }: SlideProps) => {
           direction={"row"}
           alignItems={"center"}
           justifyContent={"center"}
-          spacing={"2px"}
+          spacing={"4px"}
           sx={{
             position: "absolute",
             bottom: "1%",
@@ -74,7 +73,7 @@ export const Slide = ({ children }: SlideProps) => {
             transform: "translate(-50%, -51%)",
             backgroundColor: "rgba(255, 255, 255, 0.2)",
             borderRadius: "45px",
-            padding: " 5px 8px",
+            padding: " 5px 14px",
             backdropFilter: "blur(3px)",
             WebkitBackdropFilter: "blur(3px)",
           }}
