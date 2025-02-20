@@ -9,7 +9,7 @@ export const Dock = () => {
   return (
     <Box
       sx={{
-        mx: "10px",
+        mx: "16px",
         height: 100,
         backgroundColor: "#ffffff44",
         borderRadius: "45px",

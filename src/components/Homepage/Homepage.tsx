@@ -3,17 +3,14 @@ import { Slide } from "../slide/Slide";
 import wallpaper from "/wallpaper.png";
 import { FirstPage } from "../slide/slides/first-page/FirstPage";
 import { Dock } from "../dock/Dock";
+import { CustomApps } from "./types";
+import { SecondPage } from "../slide/slides/second-page/SecondPage";
 
-export type HomepageProps = {
-  customApp: {
-    image?: string;
-    title?: string;
-    onClick?: () => void;
-    enableBorder?: boolean;
-  };
-};
+export const Homepage = ({ customApps }: CustomApps) => {
+  const apps = customApps || []; // customApps undefined ise boş dizi kullan
 
-export const Homepage = ({ customApp }: HomepageProps) => {
+  const [firstApp, ...remainingApps] = apps; // İlk eleman ve geri kalan elemanlar
+
   return (
     <>
       <img
@@ -27,10 +24,10 @@ export const Homepage = ({ customApp }: HomepageProps) => {
           borderRadius: "60px",
         }}
       />
-      <Box sx={{ paddingX: "12px", paddingTop: "64px" }}>
+      <Box sx={{ paddingTop: "64px" }}>
         <Slide>
-          <FirstPage customApp={customApp} />
-          <Box />
+          <FirstPage customApps={firstApp ? [firstApp] : []} />
+          <SecondPage customApps={remainingApps} />
         </Slide>
         <Dock />
       </Box>

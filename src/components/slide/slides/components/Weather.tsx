@@ -18,7 +18,7 @@ export const Weather = () => {
       >
         <Box>
           <Typography variant="body1" color="#F2F2F7">
-            Gebze
+            Bursa
           </Typography>
           <Typography variant="h4" fontWeight={"200"} color="#F2F2F7">
             32°

@@ -21,14 +21,7 @@ export const CustomApp = () => {
       height={"100%"}
     >
       <NowPlaying />
-      <Box
-        width={"100%"}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
         <Box sx={{ height: "280px", width: "280px", position: "relative" }}>
           <Box
             sx={{
@@ -64,7 +57,7 @@ export const CustomApp = () => {
             </MediumButton>
           </Box>
         </Box>
-      </Box>
+      </Stack>
       <Box>
         <Typography variant="h4" textAlign={"center"} fontWeight={600}>
           Army of the Night

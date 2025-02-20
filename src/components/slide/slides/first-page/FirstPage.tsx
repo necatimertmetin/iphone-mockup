@@ -6,11 +6,11 @@ import {
   Calendar,
   AppButton,
   importIcons,
-} from "./components";
+} from "../components";
 import * as motion from "motion/react-client";
-import { HomepageProps } from "../../../Homepage/Homepage";
+import { CustomApps } from "../../../Homepage/types";
 
-export const FirstPage = ({ customApp }: HomepageProps) => {
+export const FirstPage = ({ customApps }: CustomApps) => {
   const [icons, setIcons] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const FirstPage = ({ customApp }: HomepageProps) => {
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{
-        scale: { type: "spring", bounce: 0 },
+        scale: { type: "spring", bounce: 0, delay: 1 },
       }}
     >
       <Grid2 flex={"2"} container spacing={2}>
@@ -41,11 +41,19 @@ export const FirstPage = ({ customApp }: HomepageProps) => {
       <Grid2 container flex={"4"} spacing={1}>
         <Calendar />
         {Object.entries(icons).map(([key, value]) => (
-          <AppButton key={key} customApp={{ image: value, title: key }} />
+          <AppButton key={key} image={value} title={key} />
         ))}
-
-        {(customApp.image || customApp.title) && (
-          <AppButton customApp={customApp} />
+        {customApps?.map(
+          (app, index) =>
+            (app.image || app.title) && (
+              <AppButton
+                key={index}
+                image={app.image}
+                title={app.title}
+                enableBorder={app.enableBorder}
+                onClick={app.onClick}
+              />
+            )
         )}
       </Grid2>
     </Stack>
