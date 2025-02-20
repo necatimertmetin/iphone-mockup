@@ -11,6 +11,7 @@ export const CustomApp = () => {
       direction={"column"}
       alignItems={"stretch"}
       justifyContent={"space-between"}
+      height={"100%"}
       component={motion.div}
       initial={{ opacity: 0, y: 100 }} // Başlangıçta şeffaf ve aşağıda
       animate={{ opacity: 1, y: 0 }} // Animasyonla görünür ve yukarıda
@@ -18,7 +19,6 @@ export const CustomApp = () => {
         opacity: { duration: 0.5 }, // Yavaşça görünür
         y: { type: "spring", stiffness: 100, damping: 25 }, // Yay animasyonu ile yukarıya kayma
       }}
-      height={"100%"}
     >
       <NowPlaying />
       <Stack width={"100%"} alignItems={"center"} justifyContent={"center"}>
@@ -41,7 +41,7 @@ export const CustomApp = () => {
               height: "100%",
               width: "100%",
               border: "5px solid #1a1c1e",
-              boxShadow: "-5px -5px 8px #ffffff22, 5px 5px 8px #000000dd",
+              boxShadow: "-5px -5px 10px #ffffff33, 5px 5px 8px #000000dd",
             }}
           />
           <Box
@@ -77,13 +77,13 @@ export const CustomApp = () => {
         </Grid2>
         <Grid2 size={6}>
           <Typography variant="body2" textAlign={"end"}>
-            1:17
+            3:31
           </Typography>
         </Grid2>
         <Grid2 size={12}>
           <LinearProgress
             variant="determinate"
-            value={40}
+            value={50}
             color={"secondary"}
             sx={{ borderRadius: "100px" }}
           />

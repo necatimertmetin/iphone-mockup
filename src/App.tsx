@@ -35,6 +35,20 @@ function App() {
         }),
       enableBorder: true,
     },
+    {
+      app: <CustomApp />,
+      image: customImage,
+      title: "hey",
+      onClick: () =>
+        setSelectedApp({
+          app: <CustomApp />,
+          image: customImage,
+          title: "hey",
+          onClick: () => setSelectedApp(null), // Bu butona tıklanınca tekrar kapanabilir
+          enableBorder: true,
+        }),
+      enableBorder: true,
+    },
   ];
 
   return (
@@ -72,8 +86,7 @@ function App() {
             <Stack
               height={"815px"}
               sx={{
-                background:
-                  "linear-gradient(180deg, rgba(53,56,62,1) 0%, rgba(24,26,28,1) 100%)",
+                background: "linear-gradient(180deg, #35383e 0%, #181a1c 100%)",
                 borderRadius: "52px",
                 paddingTop: "64px",
                 paddingX: "12px",

@@ -20,7 +20,7 @@ export const SecondPage = ({ customApps }: CustomApps) => {
       <Grid2 container spacing={1}>
         {customApps?.map(
           (app, index) =>
-            (app.image || app.title) && (
+            app.app && (
               <AppButton
                 key={index}
                 image={app.image}

@@ -45,7 +45,7 @@ export const FirstPage = ({ customApps }: CustomApps) => {
         ))}
         {customApps?.map(
           (app, index) =>
-            (app.image || app.title) && (
+            app.app && (
               <AppButton
                 key={index}
                 image={app.image}
