@@ -2,7 +2,6 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme } from "./theme";
 import { Homepage } from "./components/Homepage/Homepage";
 import { useState } from "react";
-import { Appbar } from "./components/Appbar";
 import { CustomAppProps } from "./components/Homepage/types";
 import { BackToHomeButton } from "./utils/BackToHomeButton";
 import { Iphone } from "./utils/Iphone";
