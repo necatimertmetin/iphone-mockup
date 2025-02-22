@@ -1,6 +1,6 @@
 import Notch from "/notch.svg";
 import Notchless from "/notchless.svg";
-import { Box, Button, CssBaseline, Stack, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme } from "./theme";
 import { Homepage } from "./components/Homepage/Homepage";
 import customImage from "/apps/custom/custom.png";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import { CustomApp } from "./components/CustomApp/CustomApp";
 import { Appbar } from "./components/Appbar";
 import { CustomAppProps } from "./components/Homepage/types";
+import { BackToHomeButton } from "./utils/BackToHomeButton";
 function App() {
   //home dock icin soldan sagdan ve asagidan paddingler 12px
   //applar icin soldan sagdan padding 31px
@@ -83,31 +84,11 @@ function App() {
           <Appbar />
 
           {selectedApp ? (
-            <Stack
-              height={"815px"}
-              sx={{
-                background: "linear-gradient(180deg, #35383e 0%, #181a1c 100%)",
-                borderRadius: "52px",
-                paddingTop: "64px",
-                paddingX: "12px",
-              }}
-            >
-              {selectedApp.app} {/* Sadece tıklanan app gösterilecek */}
-              <Button
-                sx={{
-                  marginTop: "auto",
-                  marginX: "auto",
-                  padding: "5px",
-                  width: "25%",
-                  boxShadow: "none",
-                  borderBottom: `1px solid ${theme.palette.text.primary}`,
-                  borderRadius: 0,
-                  backgroundColor: "transparent",
-                }}
-                variant="contained"
-                onClick={() => setSelectedApp(null)} // Uygulamayı kapatmak için
-              />
-            </Stack>
+            <Box sx={{ position: "relative" }}>
+              {selectedApp.app}
+
+              <BackToHomeButton onClick={() => setSelectedApp(null)} />
+            </Box>
           ) : (
             <Homepage customApps={AppParameters} />
           )}

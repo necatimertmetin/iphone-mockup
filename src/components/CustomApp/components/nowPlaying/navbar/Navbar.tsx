@@ -1,8 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { IoIosInformation, IoIosMenu } from "react-icons/io";
-import { MediumButton } from "../Button";
+import { MediumButton } from "../../Button";
 
-export const NowPlaying = () => {
+export const Navbar = () => {
   return (
     <Stack
       direction={"row"}
