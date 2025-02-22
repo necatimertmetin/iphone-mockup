@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import { Stack, Typography } from "@mui/material";
 import { IoIosSearch } from "react-icons/io";
 type SlideProps = {
-  children: React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[];
 };
 
 export const Slide = ({ children }: SlideProps) => {
@@ -37,6 +37,8 @@ export const Slide = ({ children }: SlideProps) => {
     }, 2000);
   };
 
+  const childrenArray = Array.isArray(children) ? children : [children];
+
   return (
     <div style={{ position: "relative" }}>
       <Swiper
@@ -46,7 +48,7 @@ export const Slide = ({ children }: SlideProps) => {
         modules={[Pagination]}
         onSlideChange={handleSlideChange} // Trigger when the slide changes
       >
-        {children.map((child, index) => (
+        {childrenArray.map((child, index) => (
           <SwiperSlide
             key={index}
             style={{

@@ -8,9 +8,15 @@ import {
   importIcons,
 } from "../components";
 import * as motion from "motion/react-client";
-import { CustomApps } from "../../../Homepage/types";
+import { CustomAppProps } from "../../../Homepage/types";
+import { AppRenderer } from "../components/app-renderer/AppRenderer";
 
-export const FirstPage = ({ customApps }: CustomApps) => {
+interface FirstPageProps {
+  customApps: CustomAppProps[]; // Ensure customApps is expected as an array
+  setSelectedApp: React.Dispatch<React.SetStateAction<CustomAppProps | null>>; // setSelectedApp type should be set here
+}
+
+export const FirstPage = ({ customApps, setSelectedApp }: FirstPageProps) => {
   const [icons, setIcons] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -43,18 +49,7 @@ export const FirstPage = ({ customApps }: CustomApps) => {
         {Object.entries(icons).map(([key, value]) => (
           <AppButton key={key} image={value} title={key} />
         ))}
-        {customApps?.map(
-          (app, index) =>
-            app.app && (
-              <AppButton
-                key={index}
-                image={app.image}
-                title={app.title}
-                enableBorder={app.enableBorder}
-                onClick={app.onClick}
-              />
-            )
-        )}
+        <AppRenderer customApps={customApps} setSelectedApp={setSelectedApp} />
       </Grid2>
     </Stack>
   );

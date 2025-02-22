@@ -1,9 +1,13 @@
 import { Stack, Grid2 } from "@mui/material";
-import { AppButton } from "../components";
 import * as motion from "motion/react-client";
-import { CustomApps } from "../../../Homepage/types";
+import { CustomAppProps } from "../../../Homepage/types";
+import { AppRenderer } from "../components/app-renderer/AppRenderer";
 
-export const SecondPage = ({ customApps }: CustomApps) => {
+interface SecondPageProps {
+  customApps: CustomAppProps[]; // Ensure customApps is expected as an array
+  setSelectedApp: React.Dispatch<React.SetStateAction<CustomAppProps | null>>; // setSelectedApp type should be set here
+}
+export const SecondPage = ({ customApps, setSelectedApp }: SecondPageProps) => {
   return (
     <Stack
       direction={"column"}
@@ -18,17 +22,7 @@ export const SecondPage = ({ customApps }: CustomApps) => {
       }}
     >
       <Grid2 container spacing={1}>
-        {customApps?.map(
-          (app, index) =>
-            app.app && (
-              <AppButton
-                key={index}
-                image={app.image}
-                title={app.title}
-                enableBorder={app.enableBorder}
-              />
-            )
-        )}
+        <AppRenderer customApps={customApps} setSelectedApp={setSelectedApp} />
       </Grid2>
     </Stack>
   );

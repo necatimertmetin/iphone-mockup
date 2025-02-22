@@ -3,13 +3,18 @@ import { Slide } from "../slide/Slide";
 import wallpaper from "/wallpaper.png";
 import { FirstPage } from "../slide/slides/first-page/FirstPage";
 import { Dock } from "../dock/Dock";
-import { CustomApps } from "./types";
+import { CustomAppProps } from "./types";
 import { SecondPage } from "../slide/slides/second-page/SecondPage";
 
-export const Homepage = ({ customApps }: CustomApps) => {
-  const apps = customApps || []; // customApps undefined ise boş dizi kullan
+interface HomepageProps {
+  customApps: CustomAppProps[]; // customApps should be an array of CustomAppProps
+  setSelectedApp: React.Dispatch<React.SetStateAction<CustomAppProps | null>>; // setSelectedApp should be passed
+}
 
-  const [firstApp, ...remainingApps] = apps; // İlk eleman ve geri kalan elemanlar
+export const Homepage = ({ customApps, setSelectedApp }: HomepageProps) => {
+  const apps = customApps || []; // If customApps is undefined, fallback to empty array
+
+  const [firstApp, ...remainingApps] = apps; // Destructure the first app and the remaining apps
 
   return (
     <>
@@ -26,8 +31,23 @@ export const Homepage = ({ customApps }: CustomApps) => {
       />
       <Box sx={{ paddingTop: "64px" }}>
         <Slide>
-          <FirstPage customApps={firstApp ? [firstApp] : []} />
-          <SecondPage customApps={remainingApps} />
+          {apps.length > 1 ? (
+            <>
+              <FirstPage
+                customApps={firstApp ? [firstApp] : []} // Passing the first app to FirstPage
+                setSelectedApp={setSelectedApp} // Passing setSelectedApp to FirstPage
+              />
+              <SecondPage
+                customApps={remainingApps}
+                setSelectedApp={setSelectedApp}
+              />
+            </>
+          ) : (
+            <FirstPage
+              customApps={firstApp ? [firstApp] : []} // Single page if only one app
+              setSelectedApp={setSelectedApp} // Passing setSelectedApp to FirstPage
+            />
+          )}
         </Slide>
         <Dock />
       </Box>

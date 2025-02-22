@@ -16,7 +16,7 @@ export const BackToHomeButton = ({ onClick }: { onClick: () => void }) => {
         backgroundColor: "transparent",
       }}
       variant="contained"
-      onClick={onClick} // Doğru kullanım
+      onClick={onClick}
     />
   );
 };

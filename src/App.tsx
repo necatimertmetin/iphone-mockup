@@ -1,14 +1,13 @@
-import Notch from "/notch.svg";
-import Notchless from "/notchless.svg";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme } from "./theme";
 import { Homepage } from "./components/Homepage/Homepage";
-import customImage from "/apps/custom/custom.png";
 import { useState } from "react";
-import { CustomApp } from "./components/CustomApp/CustomApp";
 import { Appbar } from "./components/Appbar";
 import { CustomAppProps } from "./components/Homepage/types";
 import { BackToHomeButton } from "./utils/BackToHomeButton";
+import { Iphone } from "./utils/Iphone";
+import { Screen } from "./utils/Screen";
+import { CustomApps } from "./components/custom-apps/CustomApps";
 function App() {
   //home dock icin soldan sagdan ve asagidan paddingler 12px
   //applar icin soldan sagdan padding 31px
@@ -21,68 +20,13 @@ function App() {
   const theme = darkTheme;
   const [selectedApp, setSelectedApp] = useState<CustomAppProps | null>(null);
 
-  const AppParameters: CustomAppProps[] = [
-    {
-      app: <CustomApp />,
-      image: customImage,
-      title: "hey",
-      onClick: () =>
-        setSelectedApp({
-          app: <CustomApp />,
-          image: customImage,
-          title: "hey",
-          onClick: () => setSelectedApp(null), // Bu butona tıklanınca tekrar kapanabilir
-          enableBorder: true,
-        }),
-      enableBorder: true,
-    },
-    {
-      app: <CustomApp />,
-      image: customImage,
-      title: "hey",
-      onClick: () =>
-        setSelectedApp({
-          app: <CustomApp />,
-          image: customImage,
-          title: "hey",
-          onClick: () => setSelectedApp(null), // Bu butona tıklanınca tekrar kapanabilir
-          enableBorder: true,
-        }),
-      enableBorder: true,
-    },
-  ];
+  const appParameters = CustomApps();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        sx={{
-          backgroundImage: Notchless,
-          width: "400px",
-          height: "824.46px",
-          position: "relative",
-          borderRadius: "60px",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src={Notch}
-          className="logo react"
-          alt="React logo"
-          width={"400px"}
-          height={"824.46px"}
-          style={{ position: "absolute", zIndex: 5, pointerEvents: "none" }}
-        />
-        <Box
-          sx={{
-            width: "398px",
-            paddingLeft: "6px",
-            borderRadius: "60px",
-            overflow: "hidden",
-          }}
-        >
-          <Appbar />
-
+      <Iphone>
+        <Screen>
           {selectedApp ? (
             <Box sx={{ position: "relative" }}>
               {selectedApp.app}
@@ -90,10 +34,13 @@ function App() {
               <BackToHomeButton onClick={() => setSelectedApp(null)} />
             </Box>
           ) : (
-            <Homepage customApps={AppParameters} />
+            <Homepage
+              customApps={appParameters}
+              setSelectedApp={setSelectedApp}
+            />
           )}
-        </Box>
-      </Box>
+        </Screen>
+      </Iphone>
     </ThemeProvider>
   );
 }

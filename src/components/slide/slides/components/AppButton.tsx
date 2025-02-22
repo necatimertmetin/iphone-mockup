@@ -3,12 +3,16 @@ import { importTemplateIcon } from "./Icons";
 import { useState, useEffect } from "react";
 import { CustomAppProps } from "../../../Homepage/types";
 import * as motion from "motion/react-client";
+
+interface AppButtonProps {
+  onClick?: () => void;
+}
 export const AppButton = ({
   image,
   title,
-  onClick,
   enableBorder,
-}: CustomAppProps) => {
+  onClick,
+}: CustomAppProps & AppButtonProps) => {
   const [templateIcon, setTemplateIcon] = useState<string | null>(null);
   const theme = useTheme();
   useEffect(() => {
