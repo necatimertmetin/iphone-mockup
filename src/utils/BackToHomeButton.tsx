@@ -5,7 +5,7 @@ export const BackToHomeButton = ({ onClick }: { onClick: () => void }) => {
     <Button
       sx={{
         position: "absolute",
-        bottom: "0",
+        top: "800px",
         left: "50%",
         transform: "translateX(-50%)",
         padding: "5px",

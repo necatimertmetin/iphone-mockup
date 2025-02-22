@@ -8,7 +8,7 @@ export const Notch = () => {
       alt="React logo"
       width={"400px"}
       height={"824.46px"}
-      style={{ position: "absolute", zIndex: 5, pointerEvents: "none" }}
+      style={{ position: "absolute", zIndex: 5000, pointerEvents: "none" }}
     />
   );
 };

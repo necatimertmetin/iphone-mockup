@@ -1,4 +1,4 @@
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme } from "./theme";
 import { Homepage } from "./components/Homepage/Homepage";
 import { useState } from "react";
@@ -6,7 +6,7 @@ import { CustomAppProps } from "./components/Homepage/types";
 import { BackToHomeButton } from "./utils/BackToHomeButton";
 import { Iphone } from "./utils/Iphone";
 import { Screen } from "./utils/Screen";
-import { CustomApps } from "./components/custom-apps/CustomApps";
+import { Apps } from "./components/apps/Apps";
 function App() {
   //home dock icin soldan sagdan ve asagidan paddingler 12px
   //applar icin soldan sagdan padding 31px
@@ -18,8 +18,7 @@ function App() {
 
   const theme = darkTheme;
   const [selectedApp, setSelectedApp] = useState<CustomAppProps | null>(null);
-
-  const appParameters = CustomApps();
+  const appParameters = Apps();
 
   return (
     <ThemeProvider theme={theme}>
@@ -27,11 +26,10 @@ function App() {
       <Iphone>
         <Screen>
           {selectedApp ? (
-            <Box sx={{ position: "relative" }}>
+            <>
               {selectedApp.app}
-
               <BackToHomeButton onClick={() => setSelectedApp(null)} />
-            </Box>
+            </>
           ) : (
             <Homepage
               customApps={appParameters}

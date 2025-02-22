@@ -6,8 +6,9 @@ import customImage from "/apps/custom/custom.png";
 import { CustomApp } from "../CustomApp/CustomApp";
 import { defaultAppIcons } from "../slide/slides/components/Icons";
 import { Calendar } from "../slide/slides/components";
+import { Calculator } from "./default-apps/calculator/Calculator";
 
-export const CustomApps = () => {
+export const Apps = () => {
   const [appParameters, setAppParameters] = useState<CustomAppProps[]>([
     {
       image: defaultAppIcons.facetime,
@@ -18,6 +19,7 @@ export const CustomApps = () => {
       title: "App Store",
     },
     {
+      app: <Calculator />,
       image: defaultAppIcons.calculator,
       title: "Calculator",
     },
