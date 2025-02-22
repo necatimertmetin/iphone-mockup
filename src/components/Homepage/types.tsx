@@ -6,6 +6,7 @@ export type CustomAppProps = {
   image?: string;
   title?: string;
   enableBorder?: boolean;
+  InteractiveIcon?: JSX.Element;
 };
 
 export type CustomApps = {

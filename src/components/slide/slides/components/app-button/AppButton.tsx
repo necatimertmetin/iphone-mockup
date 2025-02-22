@@ -1,8 +1,9 @@
 import { IconButton, Grid2, Typography, useTheme } from "@mui/material";
-import { importTemplateIcon } from "./Icons";
+import { importTemplateIcon } from "../Icons";
 import { useState, useEffect } from "react";
-import { CustomAppProps } from "../../../Homepage/types";
+import { CustomAppProps } from "../../../../Homepage/types";
 import * as motion from "motion/react-client";
+import { InteractiveIconWrapper } from "./InteractiveIconWrapper";
 
 interface AppButtonProps {
   onClick?: () => void;
@@ -11,6 +12,7 @@ export const AppButton = ({
   image,
   title,
   enableBorder,
+  InteractiveIcon,
   onClick,
 }: CustomAppProps & AppButtonProps) => {
   const [templateIcon, setTemplateIcon] = useState<string | null>(null);
@@ -20,7 +22,13 @@ export const AppButton = ({
       importTemplateIcon().then((icon) => setTemplateIcon(icon.template));
     }
   }, []);
-  return (
+  return InteractiveIcon ? (
+    <InteractiveIconWrapper
+      title={title}
+      InteractiveIcon={InteractiveIcon}
+      onClick={onClick}
+    />
+  ) : (
     <Grid2
       size={3}
       display={"flex"}

@@ -1,4 +1,4 @@
-const appIcons: Record<string, string> = {
+export const defaultAppIcons: Record<string, string> = {
   facetime: "/apps/light/facetime.png",
   appStore: "/apps/light/app store.png",
   calculator: "/apps/light/calculator.png",
@@ -16,20 +16,6 @@ const appIcons: Record<string, string> = {
   template: "/apps/light/template.png",
   //wallet: "/apps/light/wallet.png",
 };
-
-export const importIcons = async () => {
-  const imports = await Promise.all(
-    Object.entries(appIcons)
-      .filter(([key]) => key !== "template") // "template" ikonunu hariç tut
-      .map(async ([key, path]) => {
-        const module = await import(/* @vite-ignore */ path);
-        return { [key]: module.default };
-      })
-  );
-
-  return Object.assign({}, ...imports);
-};
-
 export const importTemplateIcon = async () => {
   const path = "/apps/light/template.png"; // Template ikonunun yolu
   const module = await import(/* @vite-ignore */ path);

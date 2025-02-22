@@ -1,21 +1,26 @@
 import { Box } from "@mui/material";
 import { Slide } from "../slide/Slide";
 import wallpaper from "/wallpaper.png";
-import { FirstPage } from "../slide/slides/first-page/FirstPage";
+import { Page } from "../slide/slides/page/Page";
 import { Dock } from "../dock/Dock";
 import { CustomAppProps } from "./types";
-import { SecondPage } from "../slide/slides/second-page/SecondPage";
 
 interface HomepageProps {
   customApps: CustomAppProps[]; // customApps should be an array of CustomAppProps
   setSelectedApp: React.Dispatch<React.SetStateAction<CustomAppProps | null>>; // setSelectedApp should be passed
 }
 
-export const Homepage = ({ customApps, setSelectedApp }: HomepageProps) => {
-  const apps = customApps || []; // If customApps is undefined, fallback to empty array
+export const Homepage = ({
+  customApps = [],
+  setSelectedApp,
+}: HomepageProps) => {
+  const chunks = [];
 
-  const [firstApp, ...remainingApps] = apps; // Destructure the first app and the remaining apps
+  for (let i = 0; i < customApps.length; i += 16) {
+    chunks.push(customApps.slice(i, i + 16));
+  }
 
+  console.log(chunks);
   return (
     <>
       <img
@@ -31,23 +36,14 @@ export const Homepage = ({ customApps, setSelectedApp }: HomepageProps) => {
       />
       <Box sx={{ paddingTop: "64px" }}>
         <Slide>
-          {apps.length > 1 ? (
-            <>
-              <FirstPage
-                customApps={firstApp ? [firstApp] : []} // Passing the first app to FirstPage
-                setSelectedApp={setSelectedApp} // Passing setSelectedApp to FirstPage
-              />
-              <SecondPage
-                customApps={remainingApps}
-                setSelectedApp={setSelectedApp}
-              />
-            </>
-          ) : (
-            <FirstPage
-              customApps={firstApp ? [firstApp] : []} // Single page if only one app
-              setSelectedApp={setSelectedApp} // Passing setSelectedApp to FirstPage
+          {chunks?.map((chunk, index) => (
+            <Page
+              key={index}
+              customApps={chunk}
+              setSelectedApp={setSelectedApp}
+              index={index}
             />
-          )}
+          ))}
         </Slide>
         <Dock />
       </Box>
